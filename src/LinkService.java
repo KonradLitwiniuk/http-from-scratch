@@ -17,7 +17,7 @@ public class LinkService {
             return Optional.empty();
         }
     }
-    public Optional<String> shortenLink(String url) {
+    public String shortenLink(String url) {
         for(int i = 0; i < 8; i++) {
             try {
                 StringBuilder sb = new StringBuilder();
@@ -27,13 +27,13 @@ public class LinkService {
                     sb.append(chars.charAt(randomIndex));
                 }
                 linkRepository.save(new Link(url, sb.toString()));
-                return Optional.of(sb.toString());
+                return sb.toString();
             } catch (SQLException e) {
                 if (!e.getSQLState().equals("23505"))
-                    return Optional.empty();
+                    throw new LinkStorageException("Błąd podczas zapisu linku w bazie danych", e);
 
             }
         }
-        return Optional.empty();
+        throw new LinkCollisionException();
     }
 }

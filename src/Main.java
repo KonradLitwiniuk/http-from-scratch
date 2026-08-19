@@ -1,12 +1,5 @@
-import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Locale;
-import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) {
